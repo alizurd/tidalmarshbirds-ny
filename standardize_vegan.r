@@ -1,7 +1,11 @@
 ## standardizing using the vegan package instead of manually like I previously did
 
 install.packages("vegan")
+install.packages("ggplot2")
+
+library(ggplot2)
 library(vegan)
+
 setwd("~/Desktop")
 sharp <- read.csv("SHARP_surveyData_2014.csv", stringsAsFactors = FALSE)
 View(sharp)
@@ -26,3 +30,5 @@ keep_columns <- c("state"
 sharp <- aggregate(. ~ surveydate, data=sharp[,keep_columns], FUN = sum)
 decostand(sharp, method = "standardize", na.rm = FALSE)
 View(sharp)
+ggplot(sharp, aes(x=alphacode)) +
+  geom_bar()
